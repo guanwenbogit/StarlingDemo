@@ -1,4 +1,5 @@
 package demo {
+	import demo.main.Welcome;
 	import demo.main.Launcher;
 	import starling.core.Starling;
 	import flash.display.Sprite;
@@ -9,7 +10,7 @@ package demo {
 	public class HelloStarling extends Sprite {
 		private var _starling:Starling;
 		public function HelloStarling() {
-			_starling = new Starling( Launcher, stage, null, null, "auto", ["baselineExtended", "baseline"]);
+			_starling = new Starling( Welcome, stage, null, null, "auto", ["baselineExtended", "baseline"]);
 			_starling.start();
 		}
 	}
