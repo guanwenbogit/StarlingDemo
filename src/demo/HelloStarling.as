@@ -1,5 +1,6 @@
 package demo {
 	import demo.main.Welcome;
+	import com.MainShell;
 	import demo.main.Launcher;
 	import starling.core.Starling;
 	import flash.display.Sprite;
