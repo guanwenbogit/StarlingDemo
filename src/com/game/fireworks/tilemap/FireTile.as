@@ -9,6 +9,8 @@ package com.game.fireworks.tilemap {
 		private var _t:int = 0;
 		private var _r:int = 0;
 		private var _b:int = 0;
+		private var _neighbours:Vector.<FireTile> = new Vector.<FireTile>();
+		private var _parent:FireTile;
 		public function FireTile() {
 			super();
 		}

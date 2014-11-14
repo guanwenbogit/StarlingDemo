@@ -25,7 +25,7 @@ package com.tile {
 		public function set position(position : Point) : void {
 			_position = position;
 		}
-
+        private var _xy:Point = new Point();
 		public function get w() : int {
 			return _w;
 		}
@@ -40,6 +40,14 @@ package com.tile {
 
 		public function set h(h : int) : void {
 			_h = h;
+		}
+
+		public function set xy(xy : Point) : void {
+			_xy = xy;
+		}
+
+		public function get xy() : Point {
+			return _xy;
 		}
 		
 	}

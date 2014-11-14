@@ -4,9 +4,10 @@ package com.tile {
 	 */
 	public class Grid extends Object {
 		private const DEFAULT_SIZE:int = 32;
-		private var _column:int = 0;
-		private var _row : int = 0;
+		protected var _column:int = 0;
+		protected var _row : int = 0;
 		protected var _tiles : Vector.<Tile> = new Vector.<Tile>();
+		private var _map:Object = {};
 		private var _len:int = 0;
 		public function Grid(r:int,c:int) {
 			setVars(r, c);
@@ -22,9 +23,12 @@ package com.tile {
 		private function creatTiles():void{
 		   for(var i:int = 0 ; i < this._len ; i++){
 		      	var tile:Tile = creatTile(i);	
+				tile.xy.x = i % this._column ;
+				tile.xy.y = int(i / this._column);
 				tile.position.x = i % this._column * tile.w;
 				tile.position.y = int(i / this._column) * tile.h;
 				_tiles.push(tile);
+				_map[tile.xy.x+""+tile.xy.y] = tile;
 		   }
 		}
 
@@ -34,6 +38,16 @@ package com.tile {
 			result.index = index;
 			result.w = result.h = DEFAULT_SIZE;
 			return result;
+		}
+
+		public function getTileByXY(x:int,y:int) : Tile {
+			var result:Tile;
+			result = this._map[x+""+y];
+			return result;
+		}
+
+		public function get tiles() : Vector.<Tile> {
+			return _tiles;
 		}
 		
 	}
