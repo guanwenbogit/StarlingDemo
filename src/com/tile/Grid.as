@@ -49,6 +49,18 @@ package com.tile {
 		public function get tiles() : Vector.<Tile> {
 			return _tiles;
 		}
+
+		public function get column() : int {
+			return _column;
+		}
+
+		public function get row() : int {
+			return _row;
+		}
+
+		public function get len() : int {
+			return _len;
+		}
 		
 	}
 }

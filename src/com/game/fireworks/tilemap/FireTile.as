@@ -11,8 +11,19 @@ package com.game.fireworks.tilemap {
 		private var _b:int = 0;
 		private var _neighbours:Vector.<FireTile> = new Vector.<FireTile>();
 		private var _parent:FireTile;
+		private var _nbTop:FireTile;
+		private var _nbBottom:FireTile;
+		private var _nbRight:FireTile;
 		public function FireTile() {
 			super();
+		}
+
+		public function turn90() : void {
+			var tmp:int = _t;
+			_t = _l;
+			_l = _b;
+			_b = _r;
+			_r = tmp;
 		}
 
 		public function get l() : int {
@@ -48,6 +59,34 @@ package com.game.fireworks.tilemap {
 		}
 
 		public function update(data : Object) : void {
+		}
+
+		public function get neighbours() : Vector.<FireTile> {
+			return _neighbours;
+		}
+
+		public function set nbTop(nbTop : FireTile) : void {
+			_nbTop = nbTop;
+		}
+
+		public function get nbTop() : FireTile {
+			return _nbTop;
+		}
+
+		public function get nbBottom() : FireTile {
+			return _nbBottom;
+		}
+
+		public function set nbBottom(nbLeft : FireTile) : void {
+			_nbBottom = nbLeft;
+		}
+
+		public function get nbRight() : FireTile {
+			return _nbRight;
+		}
+
+		public function set nbRight(nbRight : FireTile) : void {
+			_nbRight = nbRight;
 		}
 	}
 }

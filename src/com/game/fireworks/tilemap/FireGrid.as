@@ -1,4 +1,5 @@
 package com.game.fireworks.tilemap {
+	import com.tile.Tile;
 	import com.tile.Grid;
 
 	/**
@@ -7,6 +8,13 @@ package com.game.fireworks.tilemap {
 	public class FireGrid extends Grid {
 		public function FireGrid(r : int = 9, c : int = 6) {
 			super(r, c);
+			setNB();
+		}
+
+		private function setNB() : void {
+			for(var tile:FireTile in this.tiles){
+				getNeighbous(tile);
+			}
 		}
 		public function updateTile(index:int,data:Object):void{
 			var tmp:FireTile = this._tiles[index] as FireTile;
@@ -35,14 +43,21 @@ package com.game.fireworks.tilemap {
 			var t:int = tile.index - this._column;
 			var r:int = tile.index + 1;
 			var b:int = tile.index + this._column;
+			var tmp:FireTile;
 			if(tile.xy.x<this._column-1){
-				result.push(this.getTileByXY(tile.xy.x+1, tile.xy.y));
+				tmp = this.getTileByXY(tile.xy.x+1, tile.xy.y) as FireTile;
+				result.push(tmp);
+				tile.nbRight = tmp;
 			}
 			if(tile.xy.y>0){
-				result.push(this.getTileByXY(tile.xy.x, tile.xy.y-1));
+				tmp = this.getTileByXY(tile.xy.x, tile.xy.y-1) as FireTile;
+				result.push(tmp);
+				tile.nbTop = tmp;
 			}
 			if(tile.xy.y<this._row - 1){
-				result.push(this.getTileByXY(tile.xy.x, tile.xy.y+1));
+				tmp = this.getTileByXY(tile.xy.x, tile.xy.y+1) as FireTile;
+				result.push(tmp);
+				tile.nbBottom = tmp;
 			}
 			return result;
 		}
