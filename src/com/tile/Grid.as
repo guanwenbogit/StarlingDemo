@@ -3,7 +3,7 @@ package com.tile {
 	 * @author wbguan
 	 */
 	public class Grid extends Object {
-		private const DEFAULT_SIZE:int = 32;
+		protected const DEFAULT_SIZE:int = 32;
 		protected var _column:int = 0;
 		protected var _row : int = 0;
 		protected var _tiles : Vector.<Tile> = new Vector.<Tile>();

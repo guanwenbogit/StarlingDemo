@@ -59,6 +59,10 @@ package com.game.fireworks.tilemap {
 		}
 
 		public function update(data : Object) : void {
+			_l = data["l"];
+			_t = data["t"];
+			_r = data["r"];
+			_b = data["b"];
 		}
 
 		public function get neighbours() : Vector.<FireTile> {
@@ -87,6 +91,10 @@ package com.game.fireworks.tilemap {
 
 		public function set nbRight(nbRight : FireTile) : void {
 			_nbRight = nbRight;
+		}
+
+		public function traceData() : String {
+			return "[ l : " + _l + " t : " + _t + " r : "+_r + " b : " + _b +" ] ";
 		}
 	}
 }
