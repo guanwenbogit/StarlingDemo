@@ -25,7 +25,9 @@ package demo.main {
 //			  this.addChild(image);
 //			}
 //			trace("welcome");
-            new FireGridDemo();
+            var demo:FireGridDemo = new FireGridDemo();
+			this.addChild(demo.view);
+			demo.view.y = demo.view.x = 100;
 		}
 	}
 }

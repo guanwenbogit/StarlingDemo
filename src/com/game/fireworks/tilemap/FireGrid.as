@@ -45,10 +45,6 @@ package com.game.fireworks.tilemap {
 
 		public function getNeighbous(tile:FireTile) : Vector.<FireTile> {
 			var result:Vector.<FireTile> = new Vector.<FireTile>();
-			var l:int = tile.index - 1;
-			var t:int = tile.index - this._column;
-			var r:int = tile.index + 1;
-			var b:int = tile.index + this._column;
 			var tmp:FireTile;
 			if(tile.xy.x<this._column-1){
 				tmp = this.getTileByXY(tile.xy.x+1, tile.xy.y) as FireTile;
