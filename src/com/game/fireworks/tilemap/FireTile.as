@@ -1,20 +1,23 @@
 package com.game.fireworks.tilemap {
+	import com.game.fireworks.tilemap.event.GridChangeEvent;
+	import starling.events.EventDispatcher;
 	import com.tile.Tile;
 
 	/**
 	 * @author wbguan
 	 */
 	public class FireTile extends Tile {
+		public var dispatcher:EventDispatcher = new EventDispatcher();
 		private var _l:int = 0;
 		private var _t:int = 0;
 		private var _r:int = 0;
 		private var _b:int = 0;
 		private var _neighbours:Vector.<FireTile> = new Vector.<FireTile>();
-		private var _parent:FireTile;
-		private var _nbTop:FireTile;
-		private var _nbBottom:FireTile;
-		private var _nbRight:FireTile;
+		private var _lastMark:int = 0;
+		private var _mark : int = 0;
+		private var _state : FireState;
 		public function FireTile() {
+			_state = new FireState();
 			super();
 		}
 
@@ -24,8 +27,28 @@ package com.game.fireworks.tilemap {
 			_l = _b;
 			_b = _r;
 			_r = tmp;
+			dispatcher.dispatchEvent(new GridChangeEvent(GridChangeEvent.TURN,true,this));
 		}
-
+		public function setLastMark(lastMark:int):void{
+			this._lastMark = lastMark;
+			dispatcher.dispatchEvent(new GridChangeEvent(GridChangeEvent.MARK));
+		}
+        public function setMark(mode:int):void{
+			this._mark = mode;
+			dispatcher.dispatchEvent(new GridChangeEvent(GridChangeEvent.MARK));
+		}
+		public function setYellow() : void {
+			this._state.state = FireState.YELLOW;
+			dispatcher.dispatchEvent(new GridChangeEvent(GridChangeEvent.MARK));
+		}
+		public function setWhite():void{
+			this._state.state = FireState.WHITE;
+			dispatcher.dispatchEvent(new GridChangeEvent(GridChangeEvent.MARK));
+		}
+		public function setRed():void{
+			this._state.state = FireState.RED;
+			dispatcher.dispatchEvent(new GridChangeEvent(GridChangeEvent.MARK));
+		}
 		public function get l() : int {
 			return _l;
 		}
@@ -69,32 +92,22 @@ package com.game.fireworks.tilemap {
 			return _neighbours;
 		}
 
-		public function set nbTop(nbTop : FireTile) : void {
-			_nbTop = nbTop;
-		}
-
-		public function get nbTop() : FireTile {
-			return _nbTop;
-		}
-
-		public function get nbBottom() : FireTile {
-			return _nbBottom;
-		}
-
-		public function set nbBottom(nbLeft : FireTile) : void {
-			_nbBottom = nbLeft;
-		}
-
-		public function get nbRight() : FireTile {
-			return _nbRight;
-		}
-
-		public function set nbRight(nbRight : FireTile) : void {
-			_nbRight = nbRight;
-		}
 
 		public function traceData() : String {
-			return "[ l : " + _l + " t : " + _t + " r : "+_r + " b : " + _b +" ] ";
+			return "[ l : " + _l + " t : " + _t + " r : " + _r + " b : " + _b + " ] ";
 		}
+
+		public function get mark() : int {
+			return _mark;
+		}
+
+		public function get lastMark() : int {
+			return _lastMark;
+		}
+
+		public function get state() : FireState {
+			return _state;
+		}
+
 	}
 }

@@ -1,16 +1,23 @@
 package demo.main {
-	import com.game.fireworks.tilemap.TileELement;
+	import com.path.INote;
+	import com.game.fireworks.path.FirePath;
 	import starling.display.Sprite;
-	import com.game.fireworks.tilemap.FireTile;
+
 	import com.game.fireworks.tilemap.FireGrid;
+	import com.game.fireworks.tilemap.FireTile;
+	import com.game.fireworks.tilemap.TileELement;
+	import com.game.fireworks.tilemap.event.GridChangeEvent;
+	import com.path.Path;
 	/**
 	 * @author wbguan
 	 */
 	public class FireGridDemo extends Object {
 		private var _view:Sprite;
+		private var _path:FirePath;
 		public function FireGridDemo() {
-			_view = new Sprite();
 			var grid:FireGrid = new FireGrid();
+			_view = new Sprite();
+			grid.dispatcher.addEventListener(GridChangeEvent.TURN, onTurn);
 			for each(var fireTile:FireTile in grid.tiles){
 				var data:Object = {};
 				var arr:Array = new Array();
@@ -36,7 +43,12 @@ package demo.main {
 				_view.addChild(element);
 				
 			}
-			grid.traceData();
+			_path = new FirePath(grid);
+			_path.search(null);
+		}
+
+		private function onTurn(event : GridChangeEvent) : void {
+			_path.search(event.data as INote);
 		}
 
 		public function get view() : Sprite {
