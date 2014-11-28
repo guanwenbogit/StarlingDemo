@@ -1,4 +1,5 @@
 package demo.main {
+	import flash.utils.getTimer;
 	import com.path.INote;
 	import com.game.fireworks.path.FirePath;
 	import starling.display.Sprite;
@@ -46,9 +47,11 @@ package demo.main {
 			_path = new FirePath(grid);
 			_path.search(null);
 		}
-
+        private var _last:Number = 0;
 		private function onTurn(event : GridChangeEvent) : void {
-			_path.search(event.data as INote);
+			_last = getTimer();
+		    _path.search(event.data as INote);
+		    trace(getTimer() - _last);
 		}
 
 		public function get view() : Sprite {

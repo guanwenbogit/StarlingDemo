@@ -1,4 +1,5 @@
 package com.game.fireworks.path {
+	import flash.utils.getTimer;
 	import com.game.fireworks.tilemap.FireGrid;
 	import com.game.fireworks.tilemap.PathNote;
 	import com.path.INote;
@@ -74,9 +75,11 @@ package com.game.fireworks.path {
 			for each(var note:PathNote in this._grid.tiles){
 				_whiteHouse[note.index] = note;
 			}
+			var last:Number = getTimer();
 			markYellow();
 			markRed();
 			markWhite();
+			trace("========= " + (getTimer() - last));
 		}
         private function clearMark():void{
 			while(this._markBuffer.length > 0){
@@ -101,33 +104,36 @@ package com.game.fireworks.path {
 				}
 			}
 		}
-
+        private var count:int = 0;
 		private function markRed() : void {
 			clearMark();
+			count = 0;
 			for each(var note:PathNote in this._redSeeds){
 				note.setRed();
 				this._whiteHouse[note.index] = null;
 				nextNote(note.lNote,note,"setRed");
 				nextNote(note.tNote,note,"setRed");
-				nextNote(note.rNote,note,"setRed");
 				nextNote(note.bNote,note,"setRed");
 			}
+			trace("=========== red count : " + count);
 		}
 
 		private function markYellow() : void {
 			clearMark();
+			count = 0;
 			for each(var note:PathNote in this._yellowSeeds){
 				note.setYellow();
 				this._whiteHouse[note.index] = null;
-				nextNote(note.lNote,note,"setYellow");
 				nextNote(note.tNote,note,"setYellow");
 				nextNote(note.rNote,note,"setYellow");
 				nextNote(note.bNote,note,"setYellow");
 			}
+			trace("=========== yellow count : " + count);
 		}
 
 		private function nextNote(note : PathNote, parent : PathNote,funcStr:String) : void {
 			if(note != null && !isMarked(note)){
+				count++;
 				var func:Function = note[funcStr] as Function;
 				func();
 				this._whiteHouse[note.index] = null;

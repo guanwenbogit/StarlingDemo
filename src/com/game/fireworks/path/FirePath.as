@@ -1,4 +1,5 @@
 package com.game.fireworks.path {
+	import flash.utils.getTimer;
 	import com.path.INote;
 	import com.game.fireworks.tilemap.FireGrid;
 	import com.path.Path;

@@ -29,14 +29,6 @@ package com.game.fireworks.tilemap {
 			_r = tmp;
 			dispatcher.dispatchEvent(new GridChangeEvent(GridChangeEvent.TURN,true,this));
 		}
-		public function setLastMark(lastMark:int):void{
-			this._lastMark = lastMark;
-			dispatcher.dispatchEvent(new GridChangeEvent(GridChangeEvent.MARK));
-		}
-        public function setMark(mode:int):void{
-			this._mark = mode;
-			dispatcher.dispatchEvent(new GridChangeEvent(GridChangeEvent.MARK));
-		}
 		public function setYellow() : void {
 			this._state.state = FireState.YELLOW;
 			dispatcher.dispatchEvent(new GridChangeEvent(GridChangeEvent.MARK));
